@@ -1,16 +1,15 @@
 import webpack from "webpack"
 import settings from "./settings"
-import { env } from "./utils"
+import { merge, env } from "./utils"
+import base from "./base_config"
 
-import extend from "./base_config"
-
-export default extend({
+export default merge({}, base, {
   entry: {
-    [settings.paths.bundles.client]: "index.js"
+    [settings.paths.bundles.client]: "index.js",
   },
 
   output: {
-    path: settings.paths.root.dist.client,
+    path: settings.paths.dist.client,
   },
 
   // Fastest tool as for incremental builds
@@ -19,8 +18,8 @@ export default extend({
 
   plugins: [
     new webpack.DefinePlugin({
-      // Don't forget to provide this to make bundle work in prod mode
-      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
-    })
-  ]
+      // there is EnvironmentPlugin for this, but it spits useless warnings when var is not defined
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+    }),
+  ],
 })

@@ -6,23 +6,23 @@ import webpack from "webpack"
 import settings from "../settings"
 import { merge, env } from "../utils"
 
-import enhancers from "../enhancers"
+import enhance from "../enhancers"
 import _ from "lodash"
 
 // ------------------
 
-const config = {
+export default enhance.lint({
   debug: env.dev(),
 
-  context: settings.paths.root.src,
+  context: settings.paths.src,
 
   resolve: {
     root: [
       // Any 3-party modules which we can't just install from remote sources for whatever reason.
       // Should take precedence over project own files.
-      settings.paths.root.vendor,
+      settings.paths.vendor,
 
-      settings.paths.root.src,
+      settings.paths.src,
     ],
 
     alias: {
@@ -56,7 +56,10 @@ const config = {
     // while in dev mode, with HMR enabled, we work not with files but with blobs,
     // so relative paths can't be resolved.
     // Full url has no such problem.
-    //publicPath: `${!settings.env.HMR_CSS ? "" : settings.env.hosts.dev}${settings.web.static}`,
+    //publicPath: `${!settings.env.HMR_CSS ? "" : settings.env.hosts.dev}${settings.web.assets}`,
+
+    // @link https://webpack.github.io/docs/configuration.html#output-publicpath
+    publicPath: settings.web.static,
   },
 
   module: {
@@ -68,10 +71,4 @@ const config = {
   },
 
   plugins: PLUGINS,
-}
-
-const base_config = enhancers.lint(config)
-
-// ------------------
-
-export default (...args) => merge({} /* ensure values are copied */, base_config, ...args)
+})

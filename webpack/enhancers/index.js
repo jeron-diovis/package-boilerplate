@@ -5,7 +5,7 @@ import lint from "./lint"
 
 export default mapValues(
   {
-    lint
+    lint,
   },
-  cfg => base => merge(base, cfg)
+  cfg => base => merge({}, base, cfg)
 )

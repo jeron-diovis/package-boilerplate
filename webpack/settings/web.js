@@ -1,9 +1,9 @@
-import path from "path"
+import sysPath from "path"
 
 const root = "/"
-const staticPath = path.join(root, "/")
 
 export default {
   root,
-  "static": staticPath
+  static: sysPath.join(root, "/static/"),
+  api: sysPath.join(root, "/api/"),
 }

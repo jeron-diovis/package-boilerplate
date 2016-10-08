@@ -7,7 +7,7 @@ export default {
       {
         test: /\.js$/i,
         include: [
-          settings.paths.root.src,
+          settings.paths.src,
         ],
         loader: "eslint",
       }

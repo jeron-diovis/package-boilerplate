@@ -11,14 +11,12 @@ const dir = subpath => path.join(root, subpath)
 // --------
 
 export default {
-  root: {
-    app: root,
-    src: dir("src"),
-    vendor: dir("vendor"),
-    assets: dir("assets"),
-    dist: {
-      client: dir("dist"),
-    }
+  app: root,
+  src: dir("src"),
+  vendor: dir("vendor"),
+  assets: dir("assets"),
+  dist: {
+    client: dir("dist"),
   },
 
   bundles: {

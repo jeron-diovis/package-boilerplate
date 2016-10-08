@@ -14,14 +14,14 @@ export const qs = (str, query) => !query ? str : `${str}?${querystring.stringify
 
 // ------
 
-const spread = {
+export const cond = {
   map: (predicate, map) => predicate ? map : {},
   list: (predicate, list) => predicate ? list : []
 }
 
 const makeEnv = predicate => {
   const fn = val => !predicate ? false : (val === undefined ? true : val)
-  Object.keys(spread).forEach(key => fn[key] = spread[key].bind(null, predicate))
+  Object.keys(cond).forEach(key => fn[key] = cond[key].bind(null, predicate))
   return fn
 }
 

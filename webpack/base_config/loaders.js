@@ -5,7 +5,7 @@ export default [
   {
     test: /\.js$/i,
     include: [
-      settings.paths.root.src,
+      settings.paths.src,
     ],
 
     loaders: [
@@ -21,34 +21,34 @@ export default [
 
   {
     test: /\.json$/i,
-    // don't include json from vendor libs unless it's really required
-    include: [
-      settings.paths.root.src,
-    ],
     loader: "json",
+    // never include json from vendor libs unless it's really required:
+    include: [
+      settings.paths.src,
+    ],
   },
 
   {
-    test: /\.(woff|ttf|eot|svg)/i,
-    loader: "file"
+    test: /\.(woff|ttf|eot|svg)$/i,
+    loader: "file",
   },
 
   {
-    test: /\.(jpe?g|png|gif)$/i,
+    test: /\.(jpe?g|png|gif|ico)$/i,
     loaders: [
       // It's quite strange, that single loader you can define as { loader: "...", query: { ... } },
       // but inside "loaders" array you CAN'T use that query syntax – only stringified form
       qs("url", {
         // Size threshold for converting img to data-uri
-        limit: 10000, // kb
+        limit: 10 * 1024,
         // On dev keep src dirs structure - just for better understanding what img came from
-        name: env.dev("[path][name].[ext]")
+        name: env.dev("[path][name].[ext]"),
       }),
 
       qs("img", {
         minimize: env.prod(),
         progressive: true,
-      })
-    ]
-  }
+      }),
+    ],
+  },
 ]
