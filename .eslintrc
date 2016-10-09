@@ -4,13 +4,16 @@
     "es6": true,
     "browser": true
   },
+  "plugins": [
+    "react"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "modules": true,
       "experimentalObjectRestSpread": true
     }
   },
-  "extends": [ "eslint:recommended" ],
+  "extends": [ "eslint:recommended", "plugin:react/recommended" ],
   "rules": {
     "no-console": 0,
     "no-inner-declarations": 0,
@@ -73,6 +76,21 @@
     "quotes": [
       2,
       "double"
-    ]
+    ],
+
+    "react/prop-types": 0,
+    "react/jsx-no-bind": [0, {
+      "ignoreRefs": true,
+      "allowArrowFunctions": false,
+      "allowBind": false
+    }],
+    "react/jsx-no-duplicate-props": [2, { "ignoreCase": true }],
+    "react/no-deprecated": 2,
+    "react/no-direct-mutation-state": 2,
+    "react/self-closing-comp": 1,
+    "react/jsx-equals-spacing": [2, "never"],
+    "react/jsx-pascal-case": 2,
+    "react/jsx-indent": [1, 2],
+    "jsx-quotes": [2, "prefer-double"]
   }
 }
